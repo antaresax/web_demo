@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+
+
+<meta charset="utf-8">
+<script src="cont/js/platform.js"></script>
+<link rel="import" href="cont/webcomponents/polymer.html">
+<link rel="import" href="cont/webcomponents/controls.html">
+</head>
+
+<h1>      Simple sound web-audio </h1>
+<body>
+<!-- Knobs/keyboards are used. You should place webcomponents.min.js / polymer.js / polymer.html / layout.html / controls.html to webcomponents folder -->
+
+ 
+ <div style="position:relative;background-image: url('cont/img/back.png');width:980px;height:600px;margin:20px auto;padding:0px;">
+
+    <webaudio-knob id="kno1"   style="position:absolute;left:48px;top:76px" src="cont/img/B-knob.png" value="0" max="900" step="1" diameter="80" sprites="99" ></webaudio-knob>
+   <webaudio-switch id="switch1" src="cont/img/switch_toggle.png"  value="0" max="1" width="54" height="54"></webaudio-switch>
+   <input type="button" class="play-button" value="Start"  onClick="startOsc(500);" />
+   <input type="button" class="stop-button" value="Stop"  onClick="off();" />
+
+
+	<script>
+// Initialize the Audio Context
+var context = new AudioContext(); // Create audio container with webkit prefix
+
+// Declare variables in the global scope so they can be disconnected
+var oscillator, gain;
+
+// Create function that routes an OscillatorNode through a GainNode and then to the output
+function startOsc(frequency){ // Frequency is passed to this function from input button 
+
+	// Create OscillatorNode
+	oscillator = context.createOscillator(); // Create sound source
+	oscillator.type = 0; // Sine wave
+	oscillator.frequency.value = frequency; // Frequency in hertz (passed from input button)
+	oscillator.start(0); // Play oscillator instantly
+	
+	// Create GainNode	
+	gain = context.createGain(); // Create gain node
+	gain.gain.value = 1; // Set gain to full volume
+
+	// Connect the Nodes
+	oscillator.connect(gain); // Connect oscillator to gain
+	gain.connect(context.destination); // Connect gain to output
+}
+
+function off() {
+	oscillator.stop(0); // Stop oscillator after 0 seconds
+    oscillator.disconnect(); // Disconnect oscillator so it can be picked up by browser�s garbage collector
+}
+
+
+
+
+
+// JavaScript EventListeners
+
+
+// Map Keyboard Events for the play/stop functions	
+
+
+		</script>
+	
+		<script>
+
+    function ddd(e) {
+      
+        if(e.target.value=="1") {
+              startOsc(500);
+          }
+             if(e.target.value=="0") {
+               off();
+          }
+       
+                                  } 
+
+      var switch1 = document.getElementById('switch1');
+        switch1.addEventListener("change",ddd,false);
+
+
+
+
+
+		</script>
+
+
+
+</body>
+</html>
