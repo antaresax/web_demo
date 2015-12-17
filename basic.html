@@ -52,16 +52,6 @@ function off() {
     oscillator.disconnect(); // Disconnect oscillator so it can be picked up by browser�s garbage collector
 }
 
-
-
-
-
-// JavaScript EventListeners
-
-
-// Map Keyboard Events for the play/stop functions	
-
-
 		</script>
 	
 		<script>
@@ -69,24 +59,16 @@ function off() {
     function ddd(e) {
       
         if(e.target.value=="1") {
-              startOsc(500);
+              startOsc(200);
           }
              if(e.target.value=="0") {
                off();
           }
-       
-                                  } 
+                                 } 
 
       var switch1 = document.getElementById('switch1');
         switch1.addEventListener("change",ddd,false);
-
-
-
-
-
+	
 		</script>
-
-
-
 </body>
 </html>
