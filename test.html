@@ -1,20 +1,237 @@
+
 <!doctype html>
 <html>
 <head>
+<meta charset="utf-8">
+<script src="cont/js/platform.js"></script>
+<link rel="import" href="cont/webcomponents/polymer.html">
+<link rel="import" href="cont/webcomponents/controls.html">
 
 </head>
+
+<h1>      Simple sound web-audio </h1>
 <body>
-<!-- Knobs/keyboards are used. You should place webcomponents.min.js / polymer.js / polymer.html / layout.html / controls.html to webcomponents folder -->
-  <script >
+<div class='controls'>
+    <button class='start'>Start</button>
+    <button class='stop' disabled>Stop</button>
+</div>
 
-var setup = function () {
 
-  alert(1);
-};
-  </script>
+<div class='display'>
+    <label for='freq'>Frequency <span class='freq'>220Hz</span>
+    <input class='freq-slider' type='range' min='0' max='20000' step='1' value='220' />
+     <input type="button" class="play" value="Start"  onClick=" osc.frequency.value = 600;" />
+    <webaudio-knob id="knob1"   style="position:absolute;left:100px;top:200px" src="cont/img/B-knob.png" value="0" max="2000" step="1" diameter="80" sprites="99"  ></webaudio-knob>
+    <webaudio-switch id="switch1" src="cont/img/switch_toggle.png"  value="0" max="1" width="54" height="54"></webaudio-switch>
+    </label>
+</div>
+          <script>
 
+ 
+
+    function knob(eee) {
+      
+              osc.frequency.value = eee;
+    
+          } 
+
+      var knob1 = document.getElementById('knob1');
+        knob1.addEventListener("change",knob,false);
+
+ </script>
 <script>
 
+var startButton = document.querySelector('.start'),
+    stopButton = document.querySelector('.stop'),
+    waveformButtons = document.querySelectorAll('.waveforms button'),
+    freqSlider = document.querySelector(".freq-slider"),
+    detuneSlider = document.querySelector('.detune-slider'),
+    gainSlider = document.querySelector('.gain-slider'),
+    gainDisplay = document.querySelector('.gain'),
+    freqDisplay = document.querySelector('.freq'),
+    detuneDisplay = document.querySelector('.detune');
 
+
+
+// load our default value
+init();
+
+// setup start/stop
+startButton.onclick = start;
+stopButton.onclick = stop;
+
+// setup waveform changes
+
+
+
+function init() {
+    audioContext = new(window.AudioContext)();
+    gain = audioContext.createGain();
+    gain.gain.value = 0.1;
+    osc = audioContext.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = 200;
+    osc.detune.value = 0;
+    osc.connect(gain);
+
+    osc.start(0);
+}
+
+
+// start everything by connecting to destination
+function start() {
+    UI('start');
+    gain.connect(audioContext.destination);
+}
+
+// stop everything by connecting to destination
+function stop() {
+    UI('stop');
+    gain.disconnect(audioContext.destination);
+}
+
+freqSlider.oninput = function () {
+    changeFreq(freqSlider.value);
+}
+
+// change frequency
+function changeFreq(fff) {
+    osc.frequency.value = fff;
+    freqDisplay.innerHTML = ffff+ 'Hz';
+}
+
+
+// utilities
+
+
+function UI(state) {
+    switch (state) {
+        case 'start':
+            startButton.disabled = true;
+            waveformButtons.disable = false;
+            stopButton.disabled = false;
+            break;
+        case 'stop':
+            startButton.disabled = false;
+            waveformButtons.disable = true;
+            stopButton.disabled = true;
+            break;
+    }
+}
+
+/* ios enable sound output */
+
+
+		</script>
+    
+        <script>
+
+var message="";
+    var log=[];
+
+    var knob1 = document.getElementById('.knob1');
+       knob1.addEventListener("change",Dump,false);
+       knob1.
+
+  
+    function Dump(e) {
+        var str="";
+       str= e.target.value 
+
+
+        console.log(str);
+        log.unshift(str);
+       
+        str="";
+        for(var i=19;i>=0;--i) {
+            if(log[i])
+                str+=log[i]+"<br/>";
+        }
+        var aa=document.getElementById("events");
+        aa.innerHTML=str;
+    
+    }
+
+
+
+
+        </script>
+
+    <script>
+
+    function knob(e) {
+      
+        if(e.target.value>="3") {
+              osc.frequency.value = 1000;
+          }
+             if(e.target.value=="0") {
+               osc.frequency.value = 500;
+          }
+       
+                                  } 
+
+      var knob1 = document.getElementById('knob1');
+        knob1.addEventListener("change",knob);
+
+
+
+
+ </script>
+      <script >
+        window.onload = function() {
+          var myBtn = document.getElementById("myBtn");
+          myBtn.addEventListener("click", myBtnClickHandler);
+        }
+
+        function myBtnClickHandler() {
+          alert("myBtn이 클릭되었습니다");
+        }
+    </script>
+    <script>
+
+    function ddd(e) {
+      
+        if(e.target.value=="1") {
+              osc.frequency.value = 1000;
+               alert("hi");
+          }
+             if(e.target.value=="0") {
+               osc.frequency.value = 500;
+          }
+       
+                                  } 
+
+      var switch1 = document.getElementById('switch1');
+        switch1.addEventListener("change",ddd,false);
+
+ </script>
+<button id="myBtn">내버튼</button>
+ <div id="events" style="position:absolute;right:0;top:0;background:rgba(128,128,255,0.5);padding:10px;color:#000;text-align:left;width:300px;height:300px;overflow:scroll"></div>
+
+<script >
+    var message="";
+    var log=[];
+
+    var knob1 = document.getElementById('knob1');
+       knob1.addEventListener("change",knob,false);
+
+  
+    function knob(data) {
+        var str="";
+       str= data.target.value 
+        osc.frequency.value = str;
+        console.log(str);
+        log.unshift(str);
+       
+        str="";
+        for(var i=19;i>=0;--i) {
+            if(log[i])
+                str+=log[i]+"<br/>";
+        }
+        var aa=document.getElementById("events");
+        aa.innerHTML=str;
+    
+    }
+</script>
 </body>
 </html>
