@@ -12,13 +12,14 @@
 <h1>      Simple Subtractive Synthesizer  </h1>
 <body>
 <div class='controls'>
-    <button class='start'>Start</button>
+    <button class='start' width="100" height="54" >Start</button>
     <button class='stop' disabled>Stop</button>
 </div>
 
 
 <div class='display'>
     <label for='freq'>Frequency <span class='freq'>220Hz</span></label>
+       <label for='freq1' style="position:absolute;left:300px;top:300px" > Frequency  <span class='freq1' >220Hz</span></label>
     <input class='freq-slider' type='range' min='0' max='500' step='1' value='220' />
      <input type="button" class="play" value="Start"  onClick=" osc.frequency.value = 600;" />
     <webaudio-knob id="knob1"   style="position:absolute;left:100px;top:200px" src="cont/img/B-knob.png" value="0" max="2000" step="1" diameter="80" sprites="99"  ></webaudio-knob>
@@ -26,7 +27,7 @@
       <webaudio-knob id="knob3"   style="position:absolute;left:300px;top:200px" src="cont/img/B-knob.png" step='0.1'  value="0.0" max="1" step="1" diameter="80" sprites="99"  ></webaudio-knob>
     <webaudio-switch id="switch1" src="cont/img/switch_toggle.png"  value="0" max="1" width="54" height="54"></webaudio-switch>
     <webaudio-param link="knob1" style="position:absolute;left:100px;top:300px"></webaudio-param>
-<webaudio-keyboard id="key1" keys="50" width="600" height="125" style="position:absolute;left:400px;top:200px"></webaudio-keyboard>
+<webaudio-keyboard id="key1"  value="0" max="1000" step="1" keys="60" width="800" height="125" style="position:absolute;left:400px;top:200px"></webaudio-keyboard>
     
 </div>
 
@@ -34,13 +35,13 @@
 
 var startButton = document.querySelector('.start'),
     stopButton = document.querySelector('.stop'),
-    waveformButtons = document.querySelectorAll('.waveforms button'),
+
     freqSlider = document.querySelector(".freq-slider"),
     detuneSlider = document.querySelector('.detune-slider'),
     gainSlider = document.querySelector('.gain-slider'),
     gainDisplay = document.querySelector('.gain'),
     freqDisplay = document.querySelector('.freq'),
-    detuneDisplay = document.querySelector('.detune');
+        freqDisplay1 = document.querySelector('.freq1');
 
 
 
@@ -62,7 +63,7 @@ function init() {
     osc = audioContext.createOscillator();
     osc.type = 'sawtooth';
     osc.frequency.value = 315;
-    osc.detune.value = 0;
+  
     
     osc.connect(lowpass);
     lowpass.connect(gain);
@@ -87,19 +88,23 @@ freqSlider.oninput = function () {
 // change frequency
 function changeFreq(fff) {
     osc.frequency.value = fff;
-    freqDisplay.innerHTML = fff+ 'Hz';
+    freqDisplay1.innerHTML = fff+ 'Hz';
+}
+function changeFreq(ff) {
+    osc.frequency.value = ff;
+    freqDisplay.innerHTML = ff+ 'Hz';
 }
 
 function UI(state) {
     switch (state) {
         case 'start':
             startButton.disabled = true;
-            waveformButtons.disable = false;
+          
             stopButton.disabled = false;
             break;
         case 'stop':
             startButton.disabled = false;
-            waveformButtons.disable = true;
+        
             stopButton.disabled = true;
             break;
     }
@@ -107,26 +112,8 @@ function UI(state) {
 
 	</script>
 
-    <script>
-
-    function knob(e) {
-      
-        if(e.target.value>="3") {
-              osc.frequency.value = 1000;
-          }
-             if(e.target.value=="0") {
-               osc.frequency.value = 500;
-          }
-       
-                                  } 
-
-      var knob1 = document.getElementById('knob1');
-        knob1.addEventListener("change",knob);
-
-
-
-
- </script>
+ 
+ <button id="myBtn">내버튼</button>
       <script >
         window.onload = function() {
           var myBtn = document.getElementById("myBtn");
@@ -154,7 +141,7 @@ function UI(state) {
         switch1.addEventListener("change",ddd,false);
 
  </script>
-<button id="myBtn">내버튼</button>
+
 <script >
    
     var knob1 = document.getElementById('knob1');
@@ -188,8 +175,18 @@ function UI(state) {
 
     function key11(data) {
         var str=0;
-        str =  440 * Math.pow(2, (data.note[1] - 69) / 12);
+        str  = 880 * 4 * Math.pow(2, (data.note[1] - 69) / 12);
            osc.frequency.value = str;
+             freqDisplay1.innerHTML = str.toFixed(0)+ 'Hz'
+
+
+        if(data.note[0]=="1") {
+             gain.gain.value = 0.7;
+               
+          }
+             if(data.note[0]=="0") {
+                  gain.gain.value = 0;
+          }
             
         }
 
