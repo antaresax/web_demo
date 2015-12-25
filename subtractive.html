@@ -25,6 +25,8 @@
      <webaudio-knob id="knob2"   style="position:absolute;left:200px;top:200px" src="cont/img/B-knob.png" value="0.0" max="20" step="1" diameter="80" sprites="99"  ></webaudio-knob>
       <webaudio-knob id="knob3"   style="position:absolute;left:300px;top:200px" src="cont/img/B-knob.png" step='0.1'  value="0.0" max="1" step="1" diameter="80" sprites="99"  ></webaudio-knob>
     <webaudio-switch id="switch1" src="cont/img/switch_toggle.png"  value="0" max="1" width="54" height="54"></webaudio-switch>
+    <webaudio-param link="knob1" style="position:absolute;left:100px;top:300px"></webaudio-param>
+<webaudio-keyboard id="key1" keys="50" width="600" height="125" style="position:absolute;left:400px;top:200px"></webaudio-keyboard>
     
 </div>
 
@@ -179,6 +181,19 @@ function UI(state) {
         var str= 0;
        str= data.target.value 
         gain.gain.value = str; }
+
+         var key1 = document.getElementById("key1");
+    key1.addEventListener('change',key11,false);
+    key1.addEventListener('note',key11,false);
+
+    function key11(data) {
+        var str=0;
+        str = data.note[1]
+           osc.frequency.value = str;
+            
+        }
+
+    
        
 </script>
 </body>
