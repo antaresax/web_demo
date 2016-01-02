@@ -11,7 +11,7 @@
 
 </head>
 
-<h2>      Simple Subtractive Synthesizer  </h2>
+<h2>        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Simple Subtractive Synthesizer  </h2>
 <body>
 
 
@@ -20,7 +20,7 @@
 
     <div style="background-image: url('cont/img/newback1.png');width:870px;height:675px;margin-left:54px; margin-top:0px;  auto;padding:0px;">
 
-       <label for='freq1' style="position:absolute;left:800px;top:460px" > Frequency<br>  <span class='freq1' >220Hz</span></label>
+       <label for='freq1' style="position:absolute;left:800px;top:470px" > Frequency <br> <span class='freq1' >220Hz<br></span></label>
   
   
     <webaudio-knob id="knob1"   style="position:absolute;left:200px;top:250px" src="cont/img/B-knob.png" value="0" max="2000" step="1" diameter="80" sprites="99"  ></webaudio-knob>
@@ -31,23 +31,26 @@
 
     <webaudio-switch id="switch1" style="position:absolute;left:800px;top:350px" src="cont/img/switch_toggle.png"  value="0" max="1" width="54" height="54"></webaudio-switch>
     <webaudio-switch id="switch2" style="position:absolute;left:800px;top:410px" src="cont/img/switch_toggle.png"  value="0" max="1" width="54" height="54"></webaudio-switch>
-    <webaudio-param link="knob1" style="position:absolute;left:500px;top:250px"></webaudio-param>
-   <webaudio-switch id="switch3"  style="position:absolute;left:785px;top:250px" src="cont/img/onoff.png" value="0" height="80" width="80" ></webaudio-switch>
+  
+   <webaudio-switch id="switch3"  style="position:absolute;left:785px;top:250px" src="cont/img/po.png" value="0" height="80" width="80" ></webaudio-switch>
 
 <webaudio-keyboard id="key1"  value="0" max="1000" step="1" keys="60" width="800" height="125" style="position:absolute;left:100px;top:553px"></webaudio-keyboard>
 
- <webaudio-slider id="slide1"  style="position:absolute;left:120px;top:350px" src="cont/img/vsliderbody.png" knobsrc="cont/img/vsliderknob.png" value="0" min="0" max="2000" step="1" width="40" height="150"  basewidth="40" baseheight="160" knobwidth="24" knobheight="24" ditchLength="100" tooltip="Slider-L"></webaudio-slider>
-  <webaudio-slider id="slide2"  style="position:absolute;left:220px;top:350px" src="cont/img/vsliderbody.png" knobsrc="cont/img/vsliderknob.png" value="0" min="0" max="100" step="1" width="40" height="150"  basewidth="40" baseheight="160" knobwidth="24" knobheight="24" ditchLength="100" tooltip="Slider-L"></webaudio-slider>
-   <webaudio-slider  id="slide3"  style="position:absolute;left:320px;top:350px" src="cont/img/vsliderbody.png" knobsrc="cont/img/vsliderknob.png" value="0" min="0" max="100" step="1" width="40" height="150"  basewidth="40" baseheight="160" knobwidth="24" knobheight="24" ditchLength="100" tooltip="Slider-L"></webaudio-slider>
-    <webaudio-slider  id="slide4"  style="position:absolute;left:420px;top:350px" src="cont/img/vsliderbody.png" knobsrc="cont/img/vsliderknob.png" value="0" min="0" max="100" step="1" width="40" height="150"  basewidth="40" baseheight="160" knobwidth="24" knobheight="24" ditchLength="100" tooltip="Slider-L"></webaudio-slider>
+ <webaudio-slider id="slide1"  style="position:absolute;left:120px;top:350px" src="cont/img/vsliderbody.png" knobsrc="cont/img/vsliderknob.png" value="0" min="0" max="2000" step="1" width="40" height="150"  basewidth="40" baseheight="160" knobwidth="24" knobheight="24" ditchLength="100" tooltip="Frequency"></webaudio-slider>
+  <webaudio-slider id="slide2"  style="position:absolute;left:220px;top:350px" src="cont/img/vsliderbody.png" knobsrc="cont/img/vsliderknob.png" value="0" min="0" max="2000" step="1" width="40" height="150"  basewidth="40" baseheight="160" knobwidth="24" knobheight="24" ditchLength="100" tooltip="Cutoff"></webaudio-slider>
+   <webaudio-slider  id="slide3"  style="position:absolute;left:320px;top:350px" src="cont/img/vsliderbody.png" knobsrc="cont/img/vsliderknob.png" value="0" min="0" max="20" step="1" width="40" height="150"  basewidth="40" baseheight="160" knobwidth="24" knobheight="24" ditchLength="100" tooltip="Resonance"></webaudio-slider>
+    <webaudio-slider  id="slide4"  style="position:absolute;left:420px;top:350px" src="cont/img/vsliderbody.png" knobsrc="cont/img/vsliderknob.png" value="0" step='0.1' min="0.0" max="1.0" step="1" width="40" height="150"  basewidth="40" baseheight="160" knobwidth="24" knobheight="24" ditchLength="100" tooltip="Gain"></webaudio-slider>
         
 
-  <webaudio-switch  id="switch4"  style="position:absolute;left:550px;top:250px" src="cont/img/bu.png" value="0" height="40" width="40" direction = "vert"></webaudio-switch>
-    <webaudio-switch  id="switch5"  style="position:absolute;left:550px;top:315px" src="cont/img/bu.png" value="0" height="40" width="40" direction = "vert"></webaudio-switch>
-      <webaudio-switch  id="switch6"  style="position:absolute;left:550px;top:380px" src="cont/img/bu.png" value="0" height="40" width="40" direction = "vert"></webaudio-switch>
-        <webaudio-switch  id="switch7"  style="position:absolute;left:550px;top:450px" src="cont/img/bu.png" value="0" height="40" width="40" direction = "vert"></webaudio-switch>
+  <input type="radio" id="switch4"   style="position:absolute;left:588px;top:267px"  name="hong" value="0"   onClick= "osc.type ='sine';"> 
+  <input type="radio"  style="position:absolute;left:588px;top:329px" name="hong" value="2" onClick="osc.type = 'sawtooth';" > 
+  <input type="radio" style="position:absolute;left:588px;top:394px"  name="hong" value="1"  onClick="osc.type = 'triangle';"> 
+  <input type="radio"  style="position:absolute;left:588px;top:465px "name="hong" value="2" onClick= "osc.type = 'square';"> 
+     
       
+
   </div>
+
 
 
 <script>
@@ -105,9 +108,27 @@ function init() {
       var switch3 = document.getElementById('switch3');
         switch3.addEventListener("change",ddd,false);
 
+function sin(e) {
+      
+        if(e.target.value=="0") {
+         osc.type = 'sine';
+
+                }
+             if(e.target.value=="1") {
+            
+              
+          }
+         } 
+
+      var switch4 = document.getElementById('switch4');
+        switch4.addEventListener("change",sin,false);
 
 
-}
+
+
+
+
+
 
 
 freqSlider.oninput = function () {
@@ -124,7 +145,7 @@ function changeFreq(ff) {
     freqDisplay.innerHTML = ff+ 'Hz';
 }
 
-
+}
 
   </script>
 
@@ -135,7 +156,8 @@ function changeFreq(ff) {
    
     var knob1 = document.getElementById('knob1');
        knob1.addEventListener("change",knob,false);
-
+ var slide2 = document.getElementById('slide2');
+      slide2.addEventListener("change",knob,false);
        function knob(data) {
         var str= 0;
        str= data.target.value 
@@ -145,7 +167,8 @@ function changeFreq(ff) {
 
            var knob2 = document.getElementById('knob2');
        knob2.addEventListener("change",knob22,false);
-
+ var slide3 = document.getElementById('slide3');
+      slide3.addEventListener("change",knob22,false);
        function knob22(data) {
         var str= 0;
        str= data.target.value 
@@ -154,7 +177,8 @@ function changeFreq(ff) {
 
            var knob3 = document.getElementById('knob3');
        knob3.addEventListener("change",knob33,false);
-
+ var slide4 = document.getElementById('slide4');
+      slide4.addEventListener("change",knob33,false);
        function knob33(data) {
         var str= 0;
        str= data.target.value 
@@ -199,3 +223,4 @@ function changeFreq(ff) {
 </script>
 </body>
 </html>
+
