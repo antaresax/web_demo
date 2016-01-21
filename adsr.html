@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="cont/js/platform.js"></script>
+
+<link rel="import" href="cont/webcomponents/polymer.html">
+<link rel="import" href="cont/webcomponents/controls.html">
+
+
+    <label for='freq1' style="position:absolute;left:800px;top:470px" > Frequency <br> <span class='freq1' >220Hz<br></span></label>
+
+
+<webaudio-switch id="switch1" src="cont/img/switch_toggle.png"  value="0" max="1" width="54" height="54"></webaudio-switch>
+<webaudio-knob id="attack"   style="position:absolute;left:200px;top:400px" src="cont/img/B-knob.png" value="1" max="100" step="1" diameter="80" sprites="99"  ></webaudio-knob>
+    <webaudio-knob id="decay"   style="position:absolute;left:300px;top:400px" src="cont/img/B-knob.png" value="1" max="100" step="1" diameter="80" sprites="99"  ></webaudio-knob>
+
+    <webaudio-knob id="sustain"   style="position:absolute;left:400px;top:400px" src="cont/img/B-knob.png" value="1" max="100" step="1" diameter="80" sprites="99"  ></webaudio-knob>
+    <webaudio-knob id="release"   style="position:absolute;left:500px;top:400px" src="cont/img/B-knob.png" value="1" max="100" step="1" diameter="80" sprites="99"  ></webaudio-knob>
+    <webaudio-knob id="duration"   style="position:absolute;left:600px;top:400px" src="cont/img/B-knob.png" value="1" max="10" step="1" diameter="80" sprites="99"  ></webaudio-knob>
+
+<webaudio-keyboard id="key1"  value="0" max="1000" step="1" keys="60" width="800" height="125" style="position:absolute;left:100px;top:303px"></webaudio-keyboard>
+
+
+<script>
+
+var  freqDisplay1 = document.querySelector('.freq1');
+		
+
+
+var context = new (window.AudioContext)(); // Create audio container
+        osc = context.createOscillator(); // Create sound source
+        amp= context.createGain(); // Create gain node
+ 
+var att =context.createGain(); 
+var dec =context.createGain(); 
+var sus= context.createGain(); 
+var rel= context.createGain(); 
+var du= context.createGain(); 
+
+
+      osc.connect(amp); // Connect sound to gain node
+      amp.connect(context.destination); // Connect gain node to speakers
+      osc.frequency.value = 2000;
+
+
+
+      du.gain.value = 2;
+      att.gain.value = 1;
+
+dec.gain.value = 50;
+
+sus.gain.value = 100;
+
+rel.gain.value = 100;
+
+// Set gain node to 30 percent volume
+
+
+
+
+
+  function adsr()    {
+  
+var a = (att.gain.value* 0.0025 ) * du.gain.value;
+var d =  (dec.gain.value  * 0.0025 ) * du.gain.value;
+var s = (sus.gain.value * 0.0025 ) * du.gain.value;
+var r = (rel.gain.value * 0.0025 ) * du.gain.value;
+var ampdata = 0.33;
+
+
+amp.gain.setValueAtTime(0.0, 0);
+amp.gain.linearRampToValueAtTime(ampdata * 0.9, a);
+amp.gain.linearRampToValueAtTime(ampdata * 0.6, a + d);
+amp.gain.linearRampToValueAtTime(ampdata * 0.6, a + d + s);
+amp.gain.linearRampToValueAtTime(ampdata * 0, a + d + s + r ); 
+  
+           
+         
+}
+
+ 
+
+var attack = document.getElementById('attack');
+       attack.addEventListener("change",attack1,false);
+
+       function attack1(data) {
+        var str= 0;
+       str= data.target.value
+    att.gain.value =str;
+ osc.frequency.value = str *10;
+
+     }
+
+
+var decay = document.getElementById('decay');
+       decay.addEventListener("change",decay1,false);
+
+       function decay1(data) {
+        var str= 0;
+       str= data.target.value 
+      dec.gain.value =str;
+
+      }
+
+
+var sustain = document.getElementById('sustain');
+       sustain.addEventListener("change",sustain1,false);
+
+       function sustain1(data) {
+        var str= 0;
+       str= data.target.value 
+       sus.gain.value =str;
+   }
+
+
+        var release = document.getElementById('release');
+       release.addEventListener("change",release1,false);
+
+       function release1(data) {
+        var str= 0;
+       str= data.target.value 
+     rel.gain.value =str;
+       }
+
+   var duration = document.getElementById('duration');
+       duration.addEventListener("change",duration1,false);
+
+       function duration1(data) {
+        var str= 0;
+       str= data.target.value 
+     du.gain.value =str;
+
+       }
+
+
+
+         var key1 = document.getElementById("key1");
+    key1.addEventListener('change',key11,false);
+    key1.addEventListener('note',key11,false);
+
+    function key11(data) {
+        var str=0;
+        str  = 880 * 4 * Math.pow(2, (data.note[1] - 69) / 12);
+           osc.frequency.value = str;
+             freqDisplay1.innerHTML = str.toFixed(0)+ 'Hz' ;
+ console.log(key11, str);
+
+    
+        if(data.note[0]=="1") {
+           osc.start();
+           adsr();
+          
+          }
+             if(data.note[0]=="0") {
+           
+               
+                  
+          }
+    
+            
+        }
+
+
+
+</script>
+
+ 
+
+ 
+
+</body>
+</html>
