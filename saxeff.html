@@ -3,13 +3,24 @@
 	<head>
 		<title>Pitch Detector</title>
 		<link href='http://fonts.googleapis.com/css?family=Alike' rel='stylesheet' type='text/css'>
-
+		<style>
+			body { font: 14pt 'Alike', sans-serif;}
+			#note { font-size: 164px; }
+			.droptarget { background-color: #348781}
+			div.confident { color: black; }
+			div.vague { color: lightgrey; }
+			#note { display: inline-block; height:180px; text-align: left;}
+			
+			#detector { width: 300px; height: 300px; border: 4px solid gray; border-radius: 8px; text-align: center; padding-top: 10px;}
+			#output { width: 300px; height: 42px; }
+			#flat { display: none; }
+			#sharp { display: none; }
+			.flat #flat { display: inline; }
+			.sharp #sharp { display: inline; }
+		</style>
 	</head>
 	<body>
-		<script> 
-
-
-		window.AudioContext = window.AudioContext || window.webkitAudioContext;
+		<script >window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 var audioContext = null;
 var isPlaying = false;
@@ -18,13 +29,19 @@ var analyser = null;
 var theBuffer = null;
 var DEBUGCANVAS = null;
 var mediaStreamSource = null;
-var detectorElem, canvasElem, waveCanvas, pitchElem, noteElem, detuneElem, detuneAmount;
+var detectorElem, 
+	canvasElem,
+	waveCanvas,
+	pitchElem,
+	noteElem,
+	detuneElem,
+	detuneAmount;
 
 window.onload = function() {
 	audioContext = new AudioContext();
 	MAX_SIZE = Math.max(4,Math.floor(audioContext.sampleRate/5000));	// corresponds to a 5kHz signal
 	var request = new XMLHttpRequest();
-	request.open("GET", "aaa.mp3", true);
+	request.open("GET", "../sounds/whistling3.ogg", true);
 	request.responseType = "arraybuffer";
 	request.onload = function() {
 	  audioContext.decodeAudioData( request.response, function(buffer) { 
@@ -348,7 +365,8 @@ function updatePitch( time ) {
 		window.requestAnimationFrame = window.webkitRequestAnimationFrame;
 	rafID = window.requestAnimationFrame( updatePitch );
 }
-		</script>
+</script>
+		
 		<p>
 			<button onclick="this.innerText = togglePlayback()">use demo audio</button>
 			<button onclick="toggleLiveInput()">use live input</button>
@@ -366,7 +384,6 @@ function updatePitch( time ) {
 		<!-- just used for debugging
 		<canvas id="waveform" width="512" height="256"></canvas>
 		-->
-	
 
 		<script type="text/javascript">
 			var _gaq = _gaq || [];
