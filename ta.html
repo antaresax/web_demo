@@ -1,0 +1,36 @@
+
+<!doctype html>
+<html>
+	<head>
+	
+
+	</head>
+	<body>
+		<script> 
+
+var context = new AudioContext();
+navigator.webkitGetUserMedia({
+  audio: true
+}, function (stream) {
+  var source = context.createMediaStreamSource(stream);
+  source.channelCount = context.destination.maxChannelCount;
+  source.connect(context.destination);
+}, function (error) {
+  console.log(error);
+});
+
+
+
+		</script>
+		<p>
+		
+			<button onclick="Input()">input on</button>
+		
+	
+		</p>
+
+		
+
+	
+	</body>
+</html>
