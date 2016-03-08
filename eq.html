@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<head><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="canonical" href="http://codepen.io/andremichelle/pen/RNwamZ" />
+
+
+</head><body>
+<h2>Web Audio Api Equalizer</h2>
+
+    <label>Low Gain</label>
+    <input type="range" value="100" step="1" min="0" max="100" oninput="changeGain(this.value, 'lowGain');"></input>
+
+    <label>Mid Gain</label>
+    <input type="range" value="100" step="1" min="0" max="100" oninput="changeGain(this.value, 'midGain');"></input>
+
+    <label>High Gain</label>
+    <input type="range" value="100" step="1" min="0" max="100" oninput="changeGain(this.value, 'highGain');"></input>
+
+
+<script>
+var context = new AudioContext();
+var osc  = context.createOscillator();
+           osc.frequency.value = 600;
+           osc.start();
+    
+
+
+var audioContext = new AudioContext();
+
+Input();
+function error() {
+    alert('Stream generation failed.');
+}
+//////////////////////////////////////////////////////////
+function getUserMedia(dictionary, callback) {
+    try {
+        navigator.getUserMedia = 
+          navigator.getUserMedia ||
+          navigator.webkitGetUserMedia;
+        
+        navigator.getUserMedia(dictionary, callback, error);
+    } catch (e) {
+        alert('getUserMedia threw exception :' + e);
+    }
+}
+
+function gotStream(stream) {
+    // Create an AudioNode from the stream.
+    mediaStreamSource = audioContext.createMediaStreamSource(stream);
+
+    // Connect it to the destination.
+    analyser = audioContext.createAnalyser();
+    amp = audioContext.createGain();
+    delay = audioContext.createDelay();
+    feedback = audioContext.createGain();
+    analyser.fftSize = 2048;
+    mediaStreamSource.connect(analyser);
+   
+    delay.connect(amp);
+    amp.connect(audioContext.destination);
+
+    mediaStreamSource.connect(delay);
+    
+
+
+    delay.connect(feedback);
+    feedback.connect(delay);
+ 
+
+   amp.gain.value=0.5;
+   delay.delayTime.value = 0;
+    feedback.gain.value=0;
+  
+    
+}
+
+
+
+
+
+
+var high = context.createBiquadFilter();
+high.type = 'peaking';
+high.frequency.value = 100;
+high.gain.value = -40;
+
+delay.connect(high);
+var highGain = context.createGain();
+high.connect(highGain);
+highGain.connect(context.destination);
+
+
+function changeGain(string, type) {
+    var value = parseFloat(string) / 100;
+    switch (type) {
+  
+    case 'highGain':
+        highGain.gain.value = value;
+        break;
+    }
+}
+
+
+
+function Input() {
+ 
+    getUserMedia(
+      {
+            "audio": {
+                "mandatory": {
+                    "googEchoCancellation": "false",
+                    
+                },
+                "optional": []
+            },
+        }, 
+        gotStream);
+}
+  
+Input();
+
+</script>
+
+      <button onclick="Input()">input on</button>
+
+</body></html>
