@@ -42,10 +42,10 @@
     <webaudio-slider  id="slide4"  style="position:absolute;left:420px;top:350px" src="cont/img/vsliderbody.png" knobsrc="cont/img/vsliderknob.png" value="0" step='0.1' min="0.0" max="1.0" step="1" width="40" height="150"  basewidth="40" baseheight="160" knobwidth="24" knobheight="24" ditchLength="100" tooltip="Gain"></webaudio-slider>
 
 
-    <input type="radio" id="switch4"   style="position:absolute;left:588px;top:267px"  name="hong" value="0"   onClick= "osc.type ='sine';"> 
-    <input type="radio"  style="position:absolute;left:588px;top:329px" name="hong" value="2" onClick="osc.type = 'sawtooth';" > 
-    <input type="radio" style="position:absolute;left:588px;top:394px"  name="hong" value="1"  onClick="osc.type = 'triangle';"> 
-    <input type="radio"  style="position:absolute;left:588px;top:465px "name="hong" value="2" onClick= "osc.type = 'square';"> 
+    <input type="radio" id="switch4"   style="position:absolute;left:588px;top:267px"  name="hong" value="0"   onClick= "osc.type ='sine';">
+    <input type="radio"  style="position:absolute;left:588px;top:329px" name="hong" value="2" onClick="osc.type = 'sawtooth';" >
+    <input type="radio" style="position:absolute;left:588px;top:394px"  name="hong" value="1"  onClick="osc.type = 'triangle';">
+    <input type="radio"  style="position:absolute;left:588px;top:465px "name="hong" value="2" onClick= "osc.type = 'square';">
 
 </div>
 
@@ -58,7 +58,7 @@ var startButton = document.querySelector('.start'),
     freqSlider = document.querySelector(".freq-slider"),
     detuneSlider = document.querySelector('.detune-slider'),
     gainSlider = document.querySelector('.gain-slider'),
-    freqDisplay = document.querySelector('.freq'),
+
     freqDisplay1 = document.querySelector('.freq1');
 
 // load our default value
@@ -90,7 +90,7 @@ stopButton.onclick = stop;
             if(e.target.value=="0") {
                 amp.disconnect(audioContext.destination);
             }
-        } 
+        }
 
         var switch3 = document.getElementById('switch3');
         switch3.addEventListener("change",ddd,false);
@@ -104,7 +104,7 @@ stopButton.onclick = stop;
             if(e.target.value=="1") {
 
             }
-        } 
+        }
 
         var switch4 = document.getElementById('switch4');
         switch4.addEventListener("change",sin,false);
@@ -116,10 +116,6 @@ stopButton.onclick = stop;
             osc.frequency.value = fff;
             freqDisplay1.innerHTML = fff+ 'Hz';
         }
-        function changeFreq(ff) {
-            osc.frequency.value = ff;
-            freqDisplay.innerHTML = ff+ 'Hz';
-        }
     }
 
 
@@ -129,8 +125,8 @@ stopButton.onclick = stop;
     slide2.addEventListener("change",knob,false);
     function knob(data) {
         var str= 0;
-        str= data.target.value 
-        lowpass.frequency.value  = str; 
+        str= data.target.value
+        lowpass.frequency.value  = str;
     }
 
     var knob2 = document.getElementById('knob2');
@@ -139,8 +135,8 @@ stopButton.onclick = stop;
     slide3.addEventListener("change",knob22,false);
     function knob22(data) {
         var str= 0;
-        str= data.target.value 
-        lowpass.Q.value  = str; 
+        str= data.target.value
+        lowpass.Q.value  = str;
     }
 
 
@@ -150,8 +146,8 @@ stopButton.onclick = stop;
     slide4.addEventListener("change",knob33,false);
     function knob33(data) {
         var str= 0;
-        str= data.target.value 
-        amp.gain.value = str; 
+        str= data.target.value
+        amp.gain.value = str;
     }
 
 
@@ -162,8 +158,8 @@ stopButton.onclick = stop;
 
     function knob44(data) {
         var str= 0;
-        str= data.target.value 
-        osc.frequency.value  = str; 
+        str= data.target.value
+        osc.frequency.value  = str;
     }
 
     var key1 = document.getElementById("key1");
@@ -183,8 +179,7 @@ stopButton.onclick = stop;
             amp.gain.value = 0;
         }
     }
-       
+
 </script>
 </body>
 </html>
-
