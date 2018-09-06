@@ -53,22 +53,12 @@
 
 <script>
 
-var startButton = document.querySelector('.start'),
-    stopButton = document.querySelector('.stop'),
-    freqSlider = document.querySelector(".freq-slider"),
-    detuneSlider = document.querySelector('.detune-slider'),
-    gainSlider = document.querySelector('.gain-slider'),
+    var freqDisplay1 = document.querySelector('.freq1');
 
-    freqDisplay1 = document.querySelector('.freq1');
+    // load our default value
+    init();
 
-// load our default value
-init();
-
-// setup start/stop
-startButton.onclick = start;
-stopButton.onclick = stop;
-
-// setup waveform chan
+    // setup waveform chan
 
     function init() {
         audioContext = new (window.AudioContext)();
@@ -83,7 +73,7 @@ stopButton.onclick = stop;
         lowpass.connect(amp);
         osc.start(0);
 
-        function ddd(e) {
+        function cont(e) {
             if(e.target.value=="1") {
                 amp.connect(audioContext.destination);
             }
@@ -93,7 +83,7 @@ stopButton.onclick = stop;
         }
 
         var switch3 = document.getElementById('switch3');
-        switch3.addEventListener("change",ddd,false);
+        switch3.addEventListener("change",cont,false);
 
         //
         // freqSlider.oninput = function () {
