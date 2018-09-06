@@ -60,10 +60,10 @@
         // setup waveform chan
 
         function init() {
-            let audioContext = new (window.AudioContext)();
-            let amp = audioContext.createGain();
-            let lowpass =audioContext.createBiquadFilter();
-            var osc = audioContext.createOscillator();
+            audioContext = new (window.AudioContext)();
+            amp = audioContext.createGain();
+            lowpass =audioContext.createBiquadFilter();
+            osc = audioContext.createOscillator();
             osc.type = 'sawtooth';
             osc.frequency.value = 315;
             lowpass.frequency.value = 200;
