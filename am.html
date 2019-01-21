@@ -57,8 +57,9 @@
 
 <script>
 
-      adsr();
+
       var context = new (window.AudioContext)(); // Create audio container
+      adsr();
       function adsr()  {
      
             osc = context.createOscillator(); // Create sound source
